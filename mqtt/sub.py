@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
 import time
  
 MQTT_SERVER = "localhost"
@@ -16,7 +17,11 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
     #display_text(str(msg.payload))
- 
+    if "IOSHelloGreetingsMessage" in str(msg.payload):
+        time.sleep(2)
+        publish.single(MQTT_PATH, "PIEcho", hostname=MQTT_SERVER)
+        
+   
     # more callbacks, etc
 
 
