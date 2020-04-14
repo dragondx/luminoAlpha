@@ -1,3 +1,7 @@
+# handles application states and logics
+# individual function contains every related to its own service
+# common services are extracted for code reuse
+
 class Lumino:
 
     def __init__(self, verbose):
@@ -12,18 +16,29 @@ class Lumino:
     # function for coral device
 
 
-    # function for cloud services
-
+    # function for uploading to cloud services
+ 
 
     # functino for dialogflow
 
 
+
+
+    ## CAMERA
     # function for camera
+    # since code for camera is lightweight, could just do it here
+
+    
+
 
 
     # function for tf
 
 
+    # START lifecycle for services
+
+
+    # STOP lifecycles for services
 
 
     ## HELPER FUNCTIONS

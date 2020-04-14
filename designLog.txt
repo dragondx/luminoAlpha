@@ -1,2 +1,4 @@
 Bluetooth -----
 --using pybleno from node bleno
+
+Opencv Installed fromn pyimagesearch raspian install opencv  3 

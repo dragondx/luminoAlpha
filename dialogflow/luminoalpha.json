@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "luminoalpha",
+  "private_key_id": "26a2de9fc49df5f3ba4ad30e1dc42e9cb0c77cbd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCHyAJV4msbTKzo\nLLYV2HZof+0TPyF5SHg4NyNmk76udz0yCjnq4wbRggJEVyLUaoLNH+azyatoTwBf\nuCj6MOmLTbIzzkg6iSgRoC8qJMo6k/pY9DrM2gCVTejKUFvOrptpqq95oG1BYR3+\naZJPW2URBHKeVdV7M+/u8ivganak5PlDq5nofp3P2+xHGsXZIiZQMLwM55fVOzuN\n9Us/lTLRIk9BLtFr+z4WuLK0g8OvNFrAZ7XkNA0B6l9vJbqh1RnhodDQWCMlNRXU\njo98ZozYYye1EsIS5J8KEOxcIBhKBb1mdutegs9z/srLWBET5x/6akB2qe5GEIRw\nzvlmmEVfAgMBAAECggEABHFT5ObVUFMFmUx/4gkaHriI05y421S2skguPVik4DqA\njcGYkYnqGt12djFPr27ovA4eKKXMQ6Efcaz/POhwISG4AfVEQb4OdJKELeHUSBm4\nEu8IJCnB48tlIYbYP36mZneyPs2JUElS3OnWuAf/2jsGBmOSlPG8bloNe3igTIGG\nk+MEiJQx/NsywlY5IRjIzcQCVz8MXxzvl0iT0yLuKAtoQW6AZef5MeND+4qBGJ9x\nQvPMSmIcy6d3ktCZltdDK+lGBiUpqfIaCPDVbdOZ5TcBpVZm19k4ixCIsPJNvXRS\nsI9mcHnjOjQCbd46ihpo7yvWp0QYihAdCN/+SME0iQKBgQC9tk2vlt9c8Z7hqp6w\nLO4+cDP8OFDlU4r1MaKVgsQ7Ay5BmLNZ7sc73hPFuweFyEUiXpE1u74O6FLcnT29\nRvXfi79SV5wodMTHbpGFAl1rs34nJhBLs5iEut6QerK16K3czbDxl0wpPu85emgN\ngatddMxi15tDAK8PHjcLl6wsHQKBgQC3OZt3raj5q0dk6+ChWqI6lR2lnW0oR6u7\n2TgI0s/wKroyFvEe227GBz5j0y8z286kYMGef/YcStOS8WcqWZ3DkSppNgQSCStY\nGm8Md5rFmSWbFKKJC8Kk//7u8dLHcrnf7yg6qJJ9w9D5eUphDKX3vOEFPpW3T1TA\niUSowSymqwKBgQC3xyXEprQkdpCCbeWiJzR4WfuSJv/+2Apx8q5chbwQqskhlIqR\n4WUx0rV2w/LKn7KRU+j5k7DPAjJbMxv/AwHml5s0aliFPHDv/WWM4ziav9vCkvYQ\nT5+9XMWEUshSvl/G2Z/Cud12y1e1Z6XrB6V5OE9SpSjsJHpxe8S5Pynz5QKBgQCf\nICvSO4L2GnetwWFcIM+l2x1dWSSVB/Gw+gy9NQEcTq9Yky4jo2VIHMBlh+KFwk9r\n2RAurGk81wt6oab8U8o9L5TKvPu6AjaflI1/IVzMYZ4UWk5ygUExdZadRG3Pg+bE\nAftJPl/DU83o7BrZwFdfma0/lcQG6KHteQmlGefCcwKBgAugdm6P5rZRN6/YgIhn\n+PFk+n63gX97QGdnWJLhSfhSaE5V8qe+mf28/yuwGdKgXqru5AxHxOGDJukoblSX\nR/IRPeTo5AG5FqvdVyFFe/UCTq9DOEG7yzaoXgiREnJ6+5GqW+VCJGUqPM7zWPIC\nxCHqnXFydrBp5K6e3iMILcuX\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflow-hubjgg@luminoalpha.iam.gserviceaccount.com",
+  "client_id": "112630212360035975301",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflow-hubjgg%40luminoalpha.iam.gserviceaccount.com"
+}
