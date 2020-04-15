@@ -3,10 +3,10 @@ import tensorflow as tf
 import sys
 import cv2
 from time import time
-from utils import *
+from objRec.utils import *
 from tflite_runtime.interpreter import load_delegate
 from tflite_runtime.interpreter import Interpreter
-from multiprocessing import Process
+import multiprocessing 
 
 # CONSTANTS
 EDGETPU_SHARED_LIB = "libedgetpu.so.1"
@@ -24,15 +24,14 @@ colors = np.random.uniform(30, 255, size=(len(classes), 3))
 
 
 class YOLO:
-    def __init__(self):
-        self.classList = []
-        self.contextOutput = []
+    def __init__(self, camQueue):
+        self.classList = multiprocessing.Array('i',80)
         self.quant = True
         self.cam = True
         self.video = False
         self.image = False
         self.edge_tpu = True
-
+        self.camQueue = camQueue
     def make_interpreter(self, model_path, edge_tpu=False):
         # Load the TF-Lite model and delegate to Edge TPU
         if edge_tpu:
@@ -139,7 +138,7 @@ class YOLO:
 
         return input_details, output_details, input_shape
 
-    def webcam_inf(self, interpreter, anchors, classes, threshold=0.25):
+    def webcam_inf(self, interpreter, anchors, classes,  classList, threshold=0.25,):
         cap = cv2.VideoCapture(0)
 
         input_details, output_details, input_shape = \
@@ -150,12 +149,13 @@ class YOLO:
         # Load and process image
         while True:
             # Read frame from webcam
-            ret, frame = cap.read()
-
+            while self.camQueue.empty():
+                pass
+            frame = self.camQueue.get()
             # Run inference, get boxes
             boxes, scores, pred_classes = self.inference(interpreter, frame, anchors, n_classes, threshold)
-            self.classList = pred_classes
-            print(self.toClassTable())
+            with classList.get_lock():
+                self.toClassTable(classList, pred_classes)
             if len(boxes) > 0:
                 self.draw_boxes(frame, boxes, scores, pred_classes, classes)
 
@@ -217,7 +217,7 @@ class YOLO:
         cv2.imshow("Image", img)
         cv2.waitKey(0)
     
-    def start_inference(self):
+    def start_inference(self, classList):
 
 
         interpreter = self.make_interpreter(MODEL, self.edge_tpu)
@@ -225,29 +225,31 @@ class YOLO:
         interpreter.allocate_tensors()
 
         if self.cam:
-            self.webcam_inf(interpreter, anchors, classes, threshold=THRESHOLD)
+            self.webcam_inf(interpreter, anchors, classes, classList, threshold=THRESHOLD)
         elif self.image:
             self.image_inf(interpreter, anchors, self.image, classes, threshold=THRESHOLD)
         elif self.video:
             self.video_inf(interpreter, anchors, classes, self.video, threshold=THRESHOLD)
 
     def start_inference_async(self):
-        self.proc = Process(target = self.start_inference)
+        self.proc = multiprocessing.Process(target = self.start_inference, args=(self.classList,))
         self.proc.start()
 
     def terminate(self):
         self.proc.terminate()
         
-    def toClassTable(self):
-        emptyTable = np.zeros(80, dtype = int)
-        for item in self.classList:
-            print(int(item))
-            emptyTable[int(item)] = 1
-        return emptyTable
+    def toClassTable(self, classList, pred_classes):
+        for i in range(len(list(classList))):
+            classList[i] = 0
+        for item in pred_classes:
+            classList[int(item)] = 1 
 
     def toClassListVerbose(self):
-        return [classes[int(item)] for item in self.classList]
-
+        lst = []
+        for index, item in enumerate(list(self.classList)):
+            if item == 1:
+                lst.append(classes[index])
+        return lst
 
 
 
