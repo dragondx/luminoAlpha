@@ -2,3 +2,8 @@ Bluetooth -----
 --using pybleno from node bleno
 
 Opencv Installed fromn pyimagesearch raspian install opencv  3 
+
+Tiny Yolo v3 speedy tpu implementation
+
+
+DEEPRNN image_captioning for the new context algorithm

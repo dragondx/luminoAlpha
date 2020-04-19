@@ -1,9 +1,9 @@
 import os
-import dialogflow
+import dialogflow_v2 as dialogflow
 from google.api_core.exceptions import InvalidArgument
 from collections import namedtuple
 
-DialogFlowQuery = namedtuple('DialogFlowQuery', 'queryText intentName intentConfidence  fulfillmentText')
+DialogFlowQuery = namedtuple('DialogFlowQuery', 'queryText intentName intentConfidence fulfillmentText')
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = '/home/pi/LuminoAlpha/dialogflow/luminoalpha.json'
 
@@ -32,4 +32,4 @@ def getDialogFlowResponse(text, verbose):
     return DialogFlowQuery( response.query_result.query_text, response.query_result.intent.display_name, response.query_result.intent_detection_confidence, response.query_result.fulfillment_text)
 
 # example:
-# print(getDialogFlowResponse("hello", False).intentName)
+# print(getDialogFlowResponse("hello", True).intentName)

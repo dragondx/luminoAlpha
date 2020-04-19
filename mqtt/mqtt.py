@@ -44,10 +44,22 @@ class MQTT:
     def on_message(self, client, userdata, msg):
         print(msg.topic+" "+str(msg.payload))
         #display_text(str(msg.payload))
-        if "IOSHelloGreetingsMessage" in str(msg.payload):
+        message = str(msg.payload)
+        message = message[message.find("b'")+2:-1]
+        
+        if "IOSHelloGreetingsMessage" in message:
             time.sleep(2)
             publish.single(MQTT_PATH, "PIEcho", hostname=MQTT_SERVER)
-            self.commandQueue.put(("tpoic","payload"))
+            self.commandQueue.put(("InitConnection","Success"))
+        elif "DFReq" in message:
+            # DialogFlow Request        
+            self.commandQueue.put(("DFReq",message.split(",")[1]))
+        elif "ImageCaptionReq" in message:
+            self.commandQueue.put(("ImageCaptionReq",""))
+        elif "FaceReq" in message:
+            self.commandQueue.put(("FaceReq",""))
+        elif "CharReq" in message:
+            self.commandQueue.put(("CharReq",""))
             
     
         # more callbacks, etc

@@ -6,6 +6,8 @@ import cv2
 from dialogflow.dialogFlow import getDialogFlowResponse
 from objRec.objectRec import ObjRec
 from mqtt.mqtt import MQTT
+from mqtt.pub import send as sendMQTTMessage
+
 class Lumino:
 
     def __init__(self, verbose):
@@ -65,16 +67,41 @@ class Lumino:
 
     # function for tf
 
+    # main context loop
 
-    # START lifecycle for services
+
+
+    # lifecycle loop for commanding individual function
     def main_logic_loop(self,):
         # Fetch new command
         if not self.commandQueue.empty():
             topic, payload = self.commandQueue.get()
-            print(topic)
-        # Check command
-
-
+            print((topic,payload))
+            if topic == "DFReq":
+                #DialogFlow Req handling
+                print("Getting Response from Dialogflow")
+                res = getDialogFlowResponse(payload, True)
+                intent = res.intentName
+                intentProb = res.intentConfidence
+                fulfillment = res.fulfillmentText
+                print(res)
+                sendMQTTMessage("DFRes,"+fulfillment)
+                # conditional selection here
+                if intent == "ObjectRec":
+                    topic = "ImageCaptionReq"
+                elif intent == "FaceRec":
+                    topic = "FaceReq"
+                elif intent == "CharRec":
+                    topic = "CharReq"
+            
+            
+            if topic == "ImageCaptionReq":
+                pass
+            elif topic == "FaceReq":
+                pass
+            elif topic == "CharReq":
+                pass
+        
     # STOP lifecycles for 
     
 
