@@ -5,20 +5,29 @@ import multiprocessing
 import cv2
 from dialogflow.dialogFlow import getDialogFlowResponse
 from objRec.objectRec import ObjRec
-
+from mqtt.mqtt import MQTT
 class Lumino:
 
     def __init__(self, verbose):
         self.verbose = verbose
         #  init all states here
         
+        
         self.camQueue = multiprocessing.Queue(1)
+        self.commandQueue = multiprocessing.Queue(2)
+
+
         self.startCameraFeed()
         self.objRecModule = ObjRec(self.camQueue)
         self.objRecModule.startYoloInference()
         
+        self.network = MQTT(self.commandQueue)
+        while True:
+            self.main_logic_loop()
+
     def __del__(self):
         self.stopCameraFeed()
+
 
     # function for bluetooth class lifecycle
 
@@ -58,9 +67,16 @@ class Lumino:
 
 
     # START lifecycle for services
+    def main_logic_loop(self,):
+        # Fetch new command
+        if not self.commandQueue.empty():
+            topic, payload = self.commandQueue.get()
+            print(topic)
+        # Check command
 
 
-    # STOP lifecycles for services
+    # STOP lifecycles for 
+    
 
 
     ## HELPER FUNCTIONS
